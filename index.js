@@ -1,19 +1,18 @@
-const discord = require('discord.js')
-const bot = new discord.Client('');
+const discord = require('discord.js');
+const config = require('./config.json');
+const client = new discord.Client('');
 
-bot.on('ready', function(){
+client.on('ready', function(){
     console.log("Ready to Roll!!")
 })
 
-bot.on('message', function(message){
-
+client.on('message', function(message){
 //PREFIX
 const prefix = ("-");
 if(message.content.startsWith(prefix)){
 
-
     if(message.content.includes('hello')){
-        message.channel.sendMessage("Hi!");
+        message.channel.send("Hi!");
     }
 
    if(message.content.includes("stats")){
@@ -27,5 +26,4 @@ if(message.content.startsWith(prefix)){
 
 }
 });
-
-bot.login('NTMyMjc2MTU5NTQ3NzAzMzQ2.DxaJHg.0ylb1zEpV_2GimDjrM7nBxI854Q')
+client.login(config.token);
