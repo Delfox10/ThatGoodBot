@@ -28,6 +28,11 @@ if(message.content.startsWith(prefix)){
         message.channel.send({ embed });
    }
 
+   //SHOWAVARTAR
+   if(message.content.includes("avatar")){
+       message.reply(message.author.avatarURL);
+   }
+
    //VC
    //JOIN
    if(message.content.includes("join")){
@@ -35,13 +40,25 @@ if(message.content.startsWith(prefix)){
    if(!message.guild.voiceConnection){
         message.member.voiceChannel.join()
         .then(connection =>{
-            message.send("joined")});
+            message.channel.send("joined")});
     }
         }else{
-            message.channel.send("Join a VC first!");
+            message.reply(" Join a VC first!");
             }
     }
 
+    //LEAVE
+    if(message.content.includes("leave")){
+        if(message.member.voiceChannel){
+        if(!message.guild.voiceConnection){
+             !message.member.voiceChannel.join()
+             .then(connection =>{
+                 message.channel.send("left")});
+         }
+             }else{
+                 message.reply(" Join a VC first!");
+                 }
+         }
 
 
 
