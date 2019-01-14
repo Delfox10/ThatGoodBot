@@ -15,6 +15,10 @@ if(message.content.startsWith(prefix)){
         message.channel.send("Hi!");
     }
 
+    if(message.content.includes('who smeli?')){
+        message.channel.send("Definatly Sonty!");
+    }
+
    if(message.content.includes("stats")){
     const embed = {
         "title": `testing`,
