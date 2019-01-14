@@ -28,6 +28,25 @@ if(message.content.startsWith(prefix)){
         message.channel.send({ embed });
    }
 
+   //VC
+   //JOIN
+   if(message.content.includes("join")){
+   if(message.member.voiceChannel){
+   if(!message.guild.voiceConnection){
+        message.member.voiceChannel.join()
+        .then(connection =>{
+            message.send("joined")});
+    }
+        }else{
+            message.channel.send("Join a VC first!");
+            }
+    }
+
+
+
+
+
+
 }
 });
 client.login(config.token);
