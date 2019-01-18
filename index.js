@@ -1,12 +1,12 @@
 const discord = require('discord.js');
 const config = require('./config.json');
-const client = new discord.Client('');
+const bot = new discord.Client('');
 
-client.on('ready', function(){
+bot.on('ready', function(){
     console.log("Ready to Roll!!")
 })
 
-client.on('message', function(message){
+bot.on('message', function(message){
 //PREFIX
 const prefix = ("-");
 if(message.content.startsWith(prefix)){
@@ -33,37 +33,30 @@ if(message.content.startsWith(prefix)){
        message.reply(message.author.avatarURL);
    }
 
-   //VC
-   //JOIN
-   if(message.content.includes("join")){
-   if(message.member.voiceChannel){
-   if(!message.guild.voiceConnection){
-        message.member.voiceChannel.join()
-        .then(connection =>{
-            message.channel.send("joined")});
+//VC
+function voicechannel(){
+    const voiceChannel = message.member.voiceChannel;
+    if (!voiceChannel) {
+      return message.reply(`Please be in a voice channel first!`);
     }
-        }else{
-            message.reply(" Join a VC first!");
-            }
-    }
+    voiceChannel.join()
+      .then(connnection => {
+        let stream = yt(url, {audioonly: true});
+        const dispatcher = connnection.playStream(stream);
+        dispatcher.on('end', () => {
+          voiceChannel.leave();
+          url = ""
+        });
+      });
+}
 
-    //LEAVE
-    if(message.content.includes("leave")){
-        if(message.member.voiceChannel){
-        if(!message.guild.voiceConnection){
-             !message.member.voiceChannel.join()
-             .then(connection =>{
-                 message.channel.send("left")});
-         }
-             }else{
-                 message.reply(" Join a VC first!");
-                 }
-         }
-
-
-
+//MUSIC
+if(message.content.includes("play")) {
+    var url = message.content.endsWith(message.content.valueOf());
+    voicechannel;
+}
 
 
 }
 });
-client.login(config.token);
+bot.login(config.token);
