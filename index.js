@@ -73,3 +73,5 @@ if(message.content.includes("play")) {
 }
 });
 bot.login(process.env.TOKEN);
+
+//SONTY IS A VERY SMELI BOI
