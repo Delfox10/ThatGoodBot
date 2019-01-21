@@ -1,6 +1,19 @@
 const discord = require('discord.js');
-const config = require('./config.json');
 const bot = new discord.Client('');
+const http = require('http');
+const express = require('express');
+const app = express();
+const yt = require('ytdl-core')
+
+//ping ev 5 mins
+app.get("/", (request, response) => {
+  console.log(Date.now() + " Ping Received");
+  response.sendStatus(200);
+});
+app.listen(process.env.PORT);
+setInterval(() => {
+  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+}, 280000);
 
 bot.on('ready', function(){
     console.log("Ready to Roll!!")
@@ -59,4 +72,4 @@ if(message.content.includes("play")) {
 
 }
 });
-bot.login(config.token);
+bot.login(process.env.TOKEN);
